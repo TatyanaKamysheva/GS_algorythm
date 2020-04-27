@@ -1,7 +1,7 @@
-% Инициализация пространства
-% N - число агентов
-% borders - массив границ пространства: borders(i)- i - измерение
-% X - начальная популяция агентов
+% Space initialization
+% N - the number of agents
+% borders - an array of the bounds of space: borders(i) - I-dimension
+% X-initial population of agents
 function [X]=initSpace(N, borders)
 up = borders(:, 1); down = borders(:, 2);
 dim = size(up, 1);
