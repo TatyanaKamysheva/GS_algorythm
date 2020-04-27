@@ -1,0 +1,581 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>main</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-27"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> main ()
+    bound = [-100 100; -100 100];
+    [P,F,I] = GSA(5, 20, 100, @test, bound);
+    disp(<span class="string">"Position of best value:"</span>);
+    disp(P);
+    disp(<span class="string">"Best fitness value:"</span>);
+    disp(F);
+    disp(<span class="string">"Iteration:"</span>);
+    disp(I);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">     1
+
+Fit
+   1.0e+07 *
+
+    4.3371
+    1.1667
+    4.5558
+    2.6512
+    3.0560
+
+X
+   74.0314   59.2530
+   49.0492  -49.4069
+  -53.8861  -78.7147
+  -30.8283  -71.5065
+   69.5834   50.3225
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     2
+
+Fit
+   1.0e+07 *
+
+    0.9529
+    0.1612
+    1.1442
+    1.7352
+    2.0089
+
+X
+   53.0680   34.1331
+   20.3675  -34.6622
+  -25.0089  -58.0391
+  -18.9504  -64.6677
+   59.6597   51.1668
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     3
+
+Fit
+   1.0e+06 *
+
+    1.4743
+    2.3412
+    6.4849
+    0.8852
+    3.2910
+
+X
+   25.5462   31.4960
+    9.0071  -39.0867
+   17.0029  -50.2626
+   -3.5072  -30.8368
+   37.9132   32.3653
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     4
+
+Fit
+   1.0e+07 *
+
+    0.0494
+    0.8204
+    1.0870
+    0.0122
+    0.0012
+
+X
+    4.9490   26.5349
+    8.8609  -53.5007
+   54.5544  -38.3433
+   19.0527   -5.9304
+   11.0337   -2.9709
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     5
+
+Fit
+   1.0e+07 *
+
+    0.0032
+    0.7742
+    2.1892
+    0.0127
+    0.0176
+
+X
+    5.3414   13.3433
+   10.6190  -52.7097
+   66.8988  -38.1649
+   18.1910   11.0774
+    4.0638  -20.5443
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     6
+
+Fit
+   1.0e+07 *
+
+    0.0014
+    0.6785
+    2.6546
+    0.0123
+    0.2148
+
+X
+   10.5091    7.1664
+   11.3456  -50.9867
+   70.4682  -38.4447
+   18.5226    8.5380
+    6.0624  -38.2927
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     7
+
+Fit
+   1.0e+07 *
+
+    0.0019
+    0.6320
+    2.7714
+    0.0169
+    0.4815
+
+X
+   12.2023   -0.1001
+   12.1466  -50.0732
+   71.2709  -38.5907
+   20.2944    6.3367
+    9.5466  -46.8125
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     8
+
+Fit
+   1.0e+07 *
+
+    0.0022
+    0.5760
+    2.7873
+    0.0220
+    0.5028
+
+X
+   12.7253   -5.1474
+   12.7446  -48.9091
+   71.3682  -38.6753
+   21.7870    4.1908
+   13.0377  -47.2605
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+     9
+
+Fit
+   1.0e+07 *
+
+    0.0035
+    0.5425
+    2.7830
+    0.0249
+    0.5158
+
+X
+   13.2661  -10.0334
+   13.1455  -48.1697
+   71.3315  -38.7154
+   22.5056    2.5618
+   15.0425  -47.5077
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    10
+
+Fit
+   1.0e+07 *
+
+    0.0058
+    0.5368
+    2.7758
+    0.0256
+    0.5232
+
+X
+   13.5542  -13.2140
+   13.4333  -48.0334
+   71.2796  -38.7291
+   22.6802    2.3880
+   15.1396  -47.6750
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    11
+
+Fit
+   1.0e+07 *
+
+    0.0065
+    0.5317
+    2.7719
+    0.0262
+    0.5247
+
+X
+   13.8095  -13.6746
+   13.5621  -47.9163
+   71.2503  -38.7395
+   22.8150    2.2544
+   15.1691  -47.7072
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    12
+
+Fit
+   1.0e+07 *
+
+    0.0068
+    0.5299
+    2.7703
+    0.0263
+    0.5256
+
+X
+   13.8576  -13.9142
+   13.5904  -47.8742
+   71.2392  -38.7402
+   22.8262    2.1241
+   15.1869  -47.7268
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    13
+
+Fit
+   1.0e+07 *
+
+    0.0070
+    0.5286
+    2.7688
+    0.0263
+    0.5264
+
+X
+   13.8773  -14.1098
+   13.5932  -47.8447
+   71.2288  -38.7408
+   22.8311    2.0993
+   15.1951  -47.7460
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    14
+
+Fit
+   1.0e+07 *
+
+    0.0071
+    0.5284
+    2.7686
+    0.0263
+    0.5266
+
+X
+   13.8787  -14.1663
+   13.5942  -47.8402
+   71.2276  -38.7410
+   22.8341    2.0778
+   15.1982  -47.7502
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    15
+
+Fit
+   1.0e+07 *
+
+    0.0072
+    0.5282
+    2.7685
+    0.0263
+    0.5267
+
+X
+   13.8790  -14.2002
+   13.5951  -47.8362
+   71.2270  -38.7412
+   22.8371    2.0657
+   15.2000  -47.7534
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    16
+
+Fit
+   1.0e+07 *
+
+    0.0072
+    0.5282
+    2.7685
+    0.0263
+    0.5268
+
+X
+   13.8792  -14.2171
+   13.5956  -47.8354
+   71.2269  -38.7413
+   22.8390    2.0603
+   15.2001  -47.7553
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    17
+
+Fit
+   1.0e+07 *
+
+    0.0072
+    0.5282
+    2.7685
+    0.0263
+    0.5269
+
+X
+   13.8794  -14.2284
+   13.5957  -47.8352
+   71.2268  -38.7413
+   22.8394    2.0602
+   15.2002  -47.7565
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    18
+
+Fit
+   1.0e+07 *
+
+    0.0072
+    0.5282
+    2.7685
+    0.0263
+    0.5269
+
+X
+   13.8794  -14.2347
+   13.5957  -47.8352
+   71.2268  -38.7414
+   22.8394    2.0601
+   15.2003  -47.7570
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    19
+
+Fit
+   1.0e+07 *
+
+    0.0072
+    0.5282
+    2.7685
+    0.0263
+    0.5269
+
+X
+   13.8794  -14.2392
+   13.5957  -47.8351
+   71.2268  -38.7414
+   22.8394    2.0601
+   15.2003  -47.7572
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+    20
+
+Fit
+   1.0e+07 *
+
+    0.0072
+    0.5282
+    2.7685
+    0.0263
+    0.5269
+
+X
+   13.8795  -14.2427
+   13.5957  -47.8351
+   71.2268  -38.7414
+   22.8394    2.0601
+   15.2004  -47.7572
+
+Best f
+   4.5558e+07
+
+Best p
+  -53.8861  -78.7147
+
+Position of best value:
+  -53.8861  -78.7147
+
+Best fitness value:
+   4.5558e+07
+
+Iteration:
+     1
+
+</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function main ()
+    bound = [-100 100; -100 100];
+    [P,F,I] = GSA(5, 20, 100, @test, bound);
+    disp("Position of best value:");
+    disp(P);
+    disp("Best fitness value:");
+    disp(F);
+    disp("Iteration:");
+    disp(I);
+end
+##### SOURCE END #####
+--></body></html>
