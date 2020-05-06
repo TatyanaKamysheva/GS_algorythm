@@ -44,14 +44,14 @@ for i=1:MAX_ITER
     disp(G);
     MASS = calcMass(FIT); %Step 4
     disp(MASS);
-    A = calcAcceleration(X, MASS, G); %Step 5
+    A = calcAcceleration(X, MASS, G, MAX_ITER, i); %Step 5
     disp(A);
     V = calcVelocity(A, V);
     disp(V);
     scatter(X(:,1), X(:,2), MASS*1000+10, FIT,'filled');
         colorbar     
         title(i);
-        pause(5);
+        pause(0.5);
         
     X = position(X, V);   %Step 6
     X = spaceBound(X,BOUND);  
